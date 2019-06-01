@@ -50,7 +50,9 @@ lib
 # Editor
 .idea
 *.iml
+##vscode
 .history/*
+launch.json
 
 #webpack json for analyse
 status.json

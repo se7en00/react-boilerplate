@@ -13,7 +13,7 @@ process.on('unhandledRejection', err => {
 require('../webpack/config/env');
 
 const webpack = require('webpack');
-const chalk = require('chalk');
+const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const paths = require('../webpack/config/paths');
 const config = require('../webpack/webpack.config.prod');

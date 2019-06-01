@@ -23,8 +23,9 @@ const ensureSlash = (pathStr, needsSlash) => {
     return pathStr;
 };
 
+const envPublicUrl = process.env.PUBLIC_URL;
+
 const getPublicUrl = appPackageJson => {
-    const envPublicUrl = process.env.PUBLIC_URL;
     return envPublicUrl || require(appPackageJson).homepage; //eslint-disable-line
 };
 
@@ -35,24 +36,25 @@ const getPublicUrl = appPackageJson => {
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 const getServedPath = appPackageJson => {
-    const envPublicUrl = getPublicUrl(appPackageJson);
-    return ensureSlash(envPublicUrl, true);
+    const publicUrl = getPublicUrl(appPackageJson);
+    const servedUrl =
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
+    return ensureSlash(servedUrl, true);
 };
 
 // config after eject: we're in ./config/
 module.exports = {
-    appName: 'aland',
+    appName: 'react-boilerplate',
     dotenv: resolveApp('.env'),
     appBuild: resolveApp('build'),
     appPublic: resolveApp('public'),
     appHtml: resolveApp('public/index.html'),
-    appIndexJs: resolveApp('app/index.js'),
+    appIndexJs: resolveApp('src/index.js'),
     appPackageJson: resolveApp('package.json'),
-    appSrc: resolveApp('app'),
-    appScss: resolveApp('app/scss'),
+    appSrc: resolveApp('src'),
+    appScss: resolveApp('src/scss'),
     yarnLockFile: resolveApp('yarn.lock'),
     appNodeModules: resolveApp('node_modules'),
     publicUrl: getPublicUrl(resolveApp('package.json')),
-    servedPath: getServedPath(resolveApp('package.json')),
-    mockerJS: resolveApp('app/mock/mocker.js')
+    servedPath: getServedPath(resolveApp('package.json'))
 };

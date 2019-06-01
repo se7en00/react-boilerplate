@@ -11,8 +11,6 @@ const {extractSassRules, extractCustomAntdLess} = require('./styleLoaders');
 const {eslintRules} = require('./eslintRules');
 const {babelLoader} = require('./babelLoader');
 const {imagesUrlLoader, fontsLoader, noMatchLoader} = require('./fileLoaders');
-//pulings
-const InterpolateHtmlPlugin = require('./InterpolateHtmlPlugin');
 
 module.exports = {
     getClientEnvironment,
@@ -26,6 +24,5 @@ module.exports = {
     babelLoader,
     imagesUrlLoader,
     fontsLoader,
-    noMatchLoader,
-    InterpolateHtmlPlugin
+    noMatchLoader
 };

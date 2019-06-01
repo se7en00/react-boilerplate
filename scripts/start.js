@@ -19,7 +19,7 @@ const clearConsole = require('react-dev-utils/clearConsole');
 
 const webpack = require('webpack');
 const fs = require('fs');
-const chalk = require('chalk');
+const chalk = require('react-dev-utils/chalk');
 const WebpackDevServer = require('webpack-dev-server');
 const paths = require('../webpack/config/paths');
 const config = require('../webpack/webpack.config.dev');
@@ -34,9 +34,23 @@ const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000; //eslint-disable-li
 const HOST = process.env.HOST || '127.0.0.1';
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const urls = prepareUrls(protocol, HOST, DEFAULT_PORT);
+const devSocket = {
+    warnings: warnings =>
+      devServer.sockWrite(devServer.sockets, 'warnings', warnings),
+    errors: errors =>
+      devServer.sockWrite(devServer.sockets, 'errors', errors),
+  };
+    const compiler = createCompiler({
+    appName: paths.appName,
+    config,
+    devSocket,
+    urls,
+    useYarn,
+    useTypeScript: false,
+    webpack,
+  });
 
 // WebpackDevServer.addDevServerEntrypoints(config, createDevServerConfig);
-const compiler = createCompiler(webpack, config, 'aland', urls, useYarn);
 // const compiler = Webpack(config);
 const server = new WebpackDevServer(compiler, createDevServerConfig(urls.lanUrlForConfig));
 

@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HappyPack = require('happypack');
 
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
@@ -16,8 +16,7 @@ const {
     babelLoader,
     imagesUrlLoader,
     fontsLoader,
-    noMatchLoader,
-    InterpolateHtmlPlugin
+    noMatchLoader
 } = require('./config');
 
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
@@ -26,11 +25,6 @@ const {
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-//global style
-const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css'});
-const extractCutomeAntdCSS = new ExtractTextPlugin({filename: 'css/global-antd-[name].css'});
-//style for css moudules
-const extractModulesCSS = new ExtractTextPlugin({filename: 'css/[name].css'});
 
 module.exports = {
     mode: 'development',
@@ -45,16 +39,13 @@ module.exports = {
         rules: [
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
-            eslintRules(paths),
+            // eslintRules(paths),
             {
                 // "oneOf" will traverse all following loaders until one will
                 // match the requirements. When no loader matches it will fall
                 // back to the "file" loader at the end of the loader list
                 oneOf: [
                     babelLoader(paths),
-                    extractSassRules(paths, extractGlobalCSS), //match global style
-                    extractSassRules(paths, extractModulesCSS, true), //match moudules style
-                    extractCustomAntdLess(extractCutomeAntdCSS),
                     imagesUrlLoader(),
                     ...fontsLoader(),
                     noMatchLoader()
@@ -63,22 +54,22 @@ module.exports = {
         ]
     },
     plugins: [
-        new HappyPack({
-            id: 'babel',
-            threadPool: happyThreadPool,
-            loaders: ['babel-loader']
-        }),
+        // new HappyPack({
+        //     id: 'babel',
+        //     threadPool: happyThreadPool,
+        //     loaders: ['babel-loader']
+        // }),
 
-        new HappyPack({
-            id: 'styles',
-            threadPool: happyThreadPool,
-            loaders: ['style-loader', 'css-loader', 'sass-loader', 'less-loader']
-        }),
+        // new HappyPack({
+        //     id: 'styles',
+        //     threadPool: happyThreadPool,
+        //     loaders: ['style-loader', 'css-loader', 'sass-loader', 'less-loader']
+        // }),
 
-        new webpack.ProvidePlugin({
-            moment: 'moment',
-            R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
-        }),
+        // new webpack.ProvidePlugin({
+        //     moment: 'moment',
+        //     R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
+        // }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             title: 'aland',
@@ -86,11 +77,12 @@ module.exports = {
             showErrors: true,
             template: paths.appHtml
         }),
+
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Makes some environment variables available in index.html.
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In development, this will be an empty string.
-        new InterpolateHtmlPlugin(env.raw),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
         new webpack.DefinePlugin(env.stringified),
@@ -103,9 +95,6 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         // new webpack.HashedModuleIdsPlugin(),
 
-        extractCutomeAntdCSS,
-        extractGlobalCSS,
-        extractModulesCSS,
 
         new webpack.optimize.SplitChunksPlugin({
             cacheGroups: {

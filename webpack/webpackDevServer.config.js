@@ -1,6 +1,5 @@
 // const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 // const ignoredFiles = require('react-dev-utils/ignoredFiles');
-const apiMocker = require('webpack-api-mocker');
 const config = require('./webpack.config.dev');
 const paths = require('./config/paths');
 
@@ -97,6 +96,5 @@ module.exports = () => ({
     //     app.use(errorOverlayMiddleware());
     // }
     before(app) {
-        apiMocker(app, paths.mockerJS);
     }
 });

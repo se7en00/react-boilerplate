@@ -41,13 +41,6 @@ const sassLoader = {
     }
 };
 
-const lessLoader = {
-    loader: require.resolve('less-loader'),
-    options: {
-        javascriptEnabled: true
-    }
-};
-
 const resolveUrlLoader = {
     loader: require.resolve('resolve-url-loader')
 };
@@ -127,8 +120,7 @@ const extractCustomAntdLess = (extractTextPlugin) => {
         Object.assign({
             fallback: styleLoader,
             use: [
-                cssLoader(),
-                lessLoader
+                cssLoader()
             ]}
         )
     );
