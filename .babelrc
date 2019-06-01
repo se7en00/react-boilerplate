@@ -1,0 +1,28 @@
+{
+    "presets": [
+        ["@babel/env",{ "modules": false }],
+        "@babel/react",
+        ["@babel/preset-stage-2", { "decoratorsLegacy": true }]
+    ],
+    "env": {
+        "development": {
+            "plugins": [
+                "@babel/plugin-transform-runtime",
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-proposal-export-namespace-from",
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/plugin-proposal-optional-chaining",
+                "react-hot-loader/babel"
+            ]
+        },
+        "production": {
+            "plugins": [
+                "@babel/plugin-transform-runtime",
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-proposal-export-namespace-from",
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/plugin-proposal-optional-chaining"
+            ]
+        }
+    }
+}
