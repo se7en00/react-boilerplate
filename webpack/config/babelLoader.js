@@ -1,5 +1,5 @@
 const babelLoader = (paths) => ({
-    test: /\.js[x]?$/,
+    test: /\.(js|mjs|jsx|ts|tsx)?$/,
     loader: require.resolve('babel-loader'),
     options: {
         // This is a feature of `babel-loader` for webpack (not Babel itself).

@@ -1,4 +1,5 @@
 const path = require('path');
+const paths = require('./paths')
 
 const resolve = (paths, alias = {}) => {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -15,7 +16,9 @@ const resolve = (paths, alias = {}) => {
 
     return {
         modules,
-        extensions: ['.js', '.jsx', '.css', '.scss'],
+        extensions: paths.moduleFileExtensions
+            .map(ext => `.${ext}`)
+            .filter(ext => paths.useTypeScript || !ext.includes('ts')),
         alias
         // plugins: [
         //     // Prevents users from importing files from outside of src/ (or node_modules/).
