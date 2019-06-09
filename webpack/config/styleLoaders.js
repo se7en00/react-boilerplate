@@ -1,6 +1,9 @@
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const paths = require('./paths')
 const isProduction = process.env.NODE_ENV === 'production';
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+
 const supportedBrowserList = [
     '> 0.75%',
     'last 3 versions',
@@ -11,6 +14,10 @@ const supportedBrowserList = [
     'not ie < 9' // React doesn't support IE8 anyway
 ];
 
+// style files regexes
+const cssRegex = /\.(sa|sc|c)ss$/
+const cssModuleRegex = /\.module\.(sa|sc|c)ss$/;
+
 // Plain style loader
 const styleLoader = require.resolve('style-loader');
 
@@ -19,8 +26,7 @@ const cssLoader = (isModule) => {
         loader: require.resolve('css-loader'),
         options: {
             importLoaders: 2,
-            minimize: isProduction,
-            sourceMap: true
+            sourceMap: shouldUseSourceMap
         }
     };
     if (isModule) {
@@ -37,9 +43,17 @@ const cssLoader = (isModule) => {
 const sassLoader = {
     loader: require.resolve('sass-loader'),
     options: {
-        sourceMap: true
+        sourceMap: shouldUseSourceMap
     }
 };
+
+const sassResourceLoader = {
+    loader: require.resolve("sass-resources-loader"),
+    options: {
+        sourceMap: shouldUseSourceMap,
+        resources: `${paths.appScss}/common.scss`
+    }
+}
 
 const resolveUrlLoader = {
     loader: require.resolve('resolve-url-loader')
@@ -74,64 +88,37 @@ const postCssLoader = () => {
     /* eslint-disable global-require */
 };
 
-const getExtractTextPluginOptions = (paths, cssFileName) => {
-    const publicPath = paths.servedPath;
-    // Some apps do not use client-side routing with pushState.
-    // For these, "homepage" can be set to "." to enable relative asset paths.
-    const shouldUseRelativeAssetPaths = publicPath === './';
-    // ExtractTextPlugin expects the build output to be flat.
-    // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
-    // However, our output is structured with css, js and media folders.
-    // To have this structure working with relative paths, we have to use custom options.
-    const extractTextPluginOptions = shouldUseRelativeAssetPaths
-        ? // Making sure that the publicPath goes back to to build folder.
-        {publicPath: Array(cssFileName.split('/').length).join('../')} //eslint-disable-line
-        : {};
-    return extractTextPluginOptions;
-};
 
-const extractSassRules = (paths, extractTextPlugin, isModule) => {
-    const regex = isModule ? /^((?!global).)*(scss|css)$/ : /.*global\.(scss|css)$/;
-    let loader = extractTextPlugin.extract(
-        Object.assign({
-            fallback: styleLoader,
-            use: [
-                cssLoader(isModule),
-                postCssLoader(),
-                resolveUrlLoader,
-                sassLoader
-            ]},
-        getExtractTextPluginOptions(paths, extractTextPlugin.filename)
-        )
-    );
-    // css reload with HMR
-    if (!isProduction) {
-        loader = ['css-hot-loader'].concat(loader);
+const getStyleLoaders = () => {
+    const loaders = (isModule = false) => [
+        isProduction ? styleLoader :
+        {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: !isProduction,
+            },
+        },
+        cssLoader(isModule),
+        postCssLoader(),
+        resolveUrlLoader,
+        sassLoader,
+        sassResourceLoader
+    ]
+    const styleRule = {
+        test: cssRegex,
+        exclude: cssModuleRegex,
+        use: loaders()
     }
 
-    return {
-        test: regex,
-        loader
-    };
-};
+    const moduleStyleRule = {
+        test: cssModuleRegex,
+        exclude: /node_modules/,
+        use: loaders(true)
+    }
 
-const extractCustomAntdLess = (extractTextPlugin) => {
-    const loader = extractTextPlugin.extract(
-        Object.assign({
-            fallback: styleLoader,
-            use: [
-                cssLoader()
-            ]}
-        )
-    );
-
-    return {
-        test: /\.less$/,
-        loader
-    };
-};
+    return [styleRule, moduleStyleRule]
+}
 
 module.exports = {
-    extractSassRules,
-    extractCustomAntdLess
+    getStyleLoaders
 };

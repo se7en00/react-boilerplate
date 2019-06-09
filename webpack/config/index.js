@@ -7,7 +7,7 @@ const {output} = require('./output');
 const {resolve} = require('./resolve');
 
 //loaders
-const {extractSassRules, extractCustomAntdLess} = require('./styleLoaders');
+const {getStyleLoaders} = require('./styleLoaders');
 const {eslintRules} = require('./eslintRules');
 const {babelLoader} = require('./babelLoader');
 const {imagesUrlLoader, fontsLoader, noMatchLoader} = require('./fileLoaders');
@@ -18,8 +18,7 @@ module.exports = {
     entry,
     output,
     resolve,
-    extractSassRules,
-    extractCustomAntdLess,
+    getStyleLoaders,
     eslintRules,
     babelLoader,
     imagesUrlLoader,

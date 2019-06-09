@@ -1,21 +1,21 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+
+// const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const {
     getClientEnvironment,
     paths,
     entry,
     output,
     resolve,
-    extractSassRules,
-    extractCustomAntdLess,
+    getStyleLoaders,
     eslintRules,
     babelLoader,
     imagesUrlLoader,
     fontsLoader,
-    noMatchLoader,
-    InterpolateHtmlPlugin
+    noMatchLoader
 } = require('./config');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -28,10 +28,10 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 //global style
-const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css'});
-const extractCutomeAntdCSS = new ExtractTextPlugin({filename: 'css/global-antd-[name].css'});
-//style for css moudules
-const extractModulesCSS = new ExtractTextPlugin({filename: 'css/[name].css'});
+// const extractGlobalCSS = new ExtractTextPlugin({filename: 'css/global-[name].css'});
+// const extractCutomeAntdCSS = new ExtractTextPlugin({filename: 'css/global-antd-[name].css'});
+// //style for css moudules
+// const extractModulesCSS = new ExtractTextPlugin({filename: 'css/[name].css'});
 
 module.exports = {
     mode: 'production',
@@ -56,9 +56,7 @@ module.exports = {
                 // back to the "file" loader at the end of the loader list
                 oneOf: [
                     babelLoader(paths),
-                    extractSassRules(paths, extractGlobalCSS), //match global style
-                    extractSassRules(paths, extractModulesCSS, true), //match moudules style
-                    extractCustomAntdLess(extractCutomeAntdCSS),
+                    ...getStyleLoaders(),
                     imagesUrlLoader(),
                     ...fontsLoader(),
                     noMatchLoader()
@@ -90,36 +88,39 @@ module.exports = {
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In development, this will be an empty string.
-        new InterpolateHtmlPlugin(env.raw),
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
         // It is absolutely essential that NODE_ENV was set to production here.
         // Otherwise React will be compiled in the very slow development mode.
         new webpack.DefinePlugin(env.stringified),
 
-        new webpack.ProvidePlugin({
-            moment: 'moment',
-            R: 'ramda'
+        // new webpack.ProvidePlugin({
+        //     moment: 'moment',
+        //     R: 'ramda'
+        // }),
+
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: 'static/css/[name].[contenthash:8].css',
+            chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
         }),
 
-        new WebpackParallelUglifyPlugin({
-            uglifyJS: {
-                output: {
-                    beautify: false,
-                    comments: false
-                },
-                compress: {
-                    warnings: false,
-                    drop_console: true,
-                    collapse_vars: true,
-                    reduce_vars: true
-                }
-            }
-        }),
-
-        extractCutomeAntdCSS,
-        extractGlobalCSS,
-        extractModulesCSS,
+        // new WebpackParallelUglifyPlugin({
+        //     uglifyJS: {
+        //         output: {
+        //             beautify: false,
+        //             comments: false
+        //         },
+        //         compress: {
+        //             warnings: false,
+        //             drop_console: true,
+        //             collapse_vars: true,
+        //             reduce_vars: true
+        //         }
+        //     }
+        // }),
 
         new webpack.optimize.SplitChunksPlugin({
             cacheGroups: {

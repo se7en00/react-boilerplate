@@ -5,7 +5,7 @@ const imagesUrlLoader = () => ({
     loader: require.resolve('url-loader'),
     options: {
         limit: 10000,
-        name: 'images/[name].[hash:8].[ext]'
+        name: 'static/images/[name].[hash:8].[ext]'
     }
 });
 
@@ -17,9 +17,9 @@ const woffUrlLoader = () => ({
         loader: require.resolve('url-loader'),
         options: {
             limit: 10000,
-            name: 'fonts/[name].[ext]',
+            name: 'static/fonts/[name].[ext]',
             mimetype: 'application/font-woff',
-            publicPath: '../'
+            // publicPath: '../'
             // publicPath: url => `../fonts/${url}`
         }
     }]
@@ -31,10 +31,10 @@ const otherFontsLoader = () => ({
     test: /.(woff(2)?|ttf|otf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: require.resolve('file-loader'),
     options: {
-        name: 'fonts/[name].[ext]',
+        name: 'static/fonts/[name].[ext]',
         limit: 10000,
         // outputPath: './', // where the fonts will go
-        publicPath: '../' // override the default path
+        // publicPath: '../' // override the default path
         // publicPath: url => `../fonts/${url}`
 
     }
@@ -51,18 +51,14 @@ const otherFontsLoader = () => ({
 const noMatchLoader = () => ({
     exclude: [
         /\.html$/,
-        /\.(js|jsx)$/,
+        /\.(js|mjs|jsx|ts|tsx)$/,
         /\.p?css$/, //postcss and regular css
         /\.sass$/,
         /\.json$/,
-        /\.bmp$/,
-        /\.gif$/,
-        /\.jpe?g$/,
-        /\.png$/
     ],
     loader: require.resolve('file-loader'),
     options: {
-        name: 'media/[name].[hash:8].[ext]'
+        name: 'static/media/[name].[hash:8].[ext]'
     }
 });
 

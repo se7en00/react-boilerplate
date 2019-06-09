@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react'
+import { hot } from 'react-hot-loader/root'
+import style from'./test.module.scss'
 
 function App() {
   return (
-    <div className="App">
-      222
+    <div className={style.test}>
+      2233333
     </div>
   );
 }
 
-export default App;
+export default hot(App);

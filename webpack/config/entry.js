@@ -5,10 +5,10 @@ const dev = (paths) => ({
     app: [
         //fix css-hot-loader bug manually
         //https://github.com/shepherdwind/css-hot-loader/issues/37
-        'css-hot-loader/hotModuleReplacement',
+        // 'css-hot-loader/hotModuleReplacement',
         // enable React HMR,react-hot-loader v4 recommended remove it from webpack config when we use hot,
         // not AppContainer component
-        // 'react-hot-loader/patch',
+        'react-hot-loader/patch',
         // this is same as options:inline in the devServer, but we need add it when use node api of dev server
         `webpack-dev-server/client?http://localhost:${port}`,
         /**

@@ -1,0 +1,69 @@
+/* this is heavy-handed approach and global reusability, don't try to bind onto these in future selectors*/
+:global{
+    .u-text-left{
+        text-align: left !important;
+    }
+
+    .u-text-center{
+        text-align: center !important;
+    }
+
+    .u-text-right{
+        text-align: right !important;
+    }
+
+    .u-position-absolute {
+        position: absolute;
+    }
+
+    .u-position-relative {
+        position: relative;
+    }
+
+    .u-full-height {
+        height: inherit;
+    }
+
+    .u-full-width {
+        width: 100% !important;
+    }
+    // containers
+    .u-pull-down-lg {
+        margin-top: rem(24px);
+    }
+
+    // small containers and buttons
+    .u-pull-down-md {
+        margin-top: rem(16px);
+    }
+
+    // Form controls and items
+    .u-pull-down-sm {
+        margin-top: rem(12px);
+    }
+
+    // small items
+    .u-pull-down-xs {
+        margin-top: rem(8px);
+    }
+
+    // containers
+    .u-push-right-lg {
+        margin-right: rem(24px);
+    }
+
+    // small containers and buttons
+    .u-push-right-md {
+        margin-right: rem(16px);
+    }
+
+    // Form controls and items
+    .u-push-right-sm {
+        margin-right: rem(12px);
+    }
+
+    // small items
+    .u-push-right-xs {
+        margin-right: rem(8px);
+    }
+}

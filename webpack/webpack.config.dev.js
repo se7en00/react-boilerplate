@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HappyPack = require('happypack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 const {
@@ -10,8 +12,7 @@ const {
     entry,
     output,
     resolve,
-    extractSassRules,
-    extractCustomAntdLess,
+    getStyleLoaders,
     eslintRules,
     babelLoader,
     imagesUrlLoader,
@@ -47,6 +48,7 @@ module.exports = {
                 oneOf: [
                     babelLoader(paths),
                     imagesUrlLoader(),
+                    ...getStyleLoaders(),
                     ...fontsLoader(),
                     noMatchLoader()
                 ]
@@ -72,10 +74,17 @@ module.exports = {
         // }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
-            title: 'aland',
+            title: 'react-boilerplate',
             inject: true,
             showErrors: true,
             template: paths.appHtml
+        }),
+
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: 'static/css/[name].[contenthash:8].css',
+            chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
         }),
 
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
@@ -95,7 +104,7 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         // new webpack.HashedModuleIdsPlugin(),
 
-
+        new ForkTsCheckerWebpackPlugin(),
         new webpack.optimize.SplitChunksPlugin({
             cacheGroups: {
                 default: {
