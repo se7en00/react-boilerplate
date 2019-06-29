@@ -1,21 +1,5 @@
 
 .test {
-    background: red;
-  @extend %fa-icon;
-  @extend .fas;
-  @include e(uu) {
-    font-size: 16px
-  }
-
-  &:before {
-    content: fa-content($fa-var-twitter);
-  }
-
-  &:after {
-    background: url('../public/favicon.ico') no-repeat;
-    content: '';
-    width: 90px;
-    height: 90px;
-    display: block;
-  }
+  background: red;
+  
 }

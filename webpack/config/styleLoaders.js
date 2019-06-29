@@ -43,17 +43,10 @@ const cssLoader = (isModule) => {
 const sassLoader = {
     loader: require.resolve('sass-loader'),
     options: {
-        sourceMap: shouldUseSourceMap
+        sourceMap: shouldUseSourceMap,
+        data: `@import "${paths.appScss}/common.scss";`
     }
 };
-
-const sassResourceLoader = {
-    loader: require.resolve("sass-resources-loader"),
-    options: {
-        sourceMap: shouldUseSourceMap,
-        resources: `${paths.appScss}/common.scss`
-    }
-}
 
 const resolveUrlLoader = {
     loader: require.resolve('resolve-url-loader')
@@ -101,8 +94,7 @@ const getStyleLoaders = () => {
         cssLoader(isModule),
         postCssLoader(),
         resolveUrlLoader,
-        sassLoader,
-        sassResourceLoader
+        sassLoader
     ]
     const styleRule = {
         test: cssRegex,
@@ -112,7 +104,6 @@ const getStyleLoaders = () => {
 
     const moduleStyleRule = {
         test: cssModuleRegex,
-        exclude: /node_modules/,
         use: loaders(true)
     }
 

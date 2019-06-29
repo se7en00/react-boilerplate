@@ -5,7 +5,7 @@ import style from'./test.module.scss'
 function App() {
   return (
     <div className={style.test}>
-      2233333
+      <i className="fab fa-500px"></i>2233333
     </div>
   );
 }

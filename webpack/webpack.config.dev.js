@@ -49,7 +49,7 @@ module.exports = {
                     babelLoader(paths),
                     imagesUrlLoader(),
                     ...getStyleLoaders(),
-                    ...fontsLoader(),
+                    fontsLoader(),
                     noMatchLoader()
                 ]
             }

@@ -27,7 +27,7 @@ const woffUrlLoader = () => ({
 
 //file with name extension tff, tof, eot,svg will be deal with file loader,
 // and output it into fonts file of build assert, url will use relative path
-const otherFontsLoader = () => ({
+const fontsLoader = () => ({
     test: /.(woff(2)?|ttf|otf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
     loader: require.resolve('file-loader'),
     options: {
@@ -62,15 +62,8 @@ const noMatchLoader = () => ({
     }
 });
 
-const fontsLoader = () => [
-    woffUrlLoader(),
-    otherFontsLoader()
-];
-
 module.exports = {
     imagesUrlLoader,
     fontsLoader,
-    woffUrlLoader,
-    otherFontsLoader,
     noMatchLoader
 };
