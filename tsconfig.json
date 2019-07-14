@@ -20,6 +20,8 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src", 
+    "typings/*"
   ]
+  // "exclude": ["node_modules", "webpack", "build"]
 }

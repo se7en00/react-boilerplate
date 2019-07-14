@@ -1,4 +1,6 @@
-{
+
+
+module.exports = {
     "parser": "babel-eslint",
     "extends": "react-app",
     "env": {
@@ -24,12 +26,13 @@
         "R": true,
         "moment": true
     },
-    "rules": {
-        "no-console": 2
-    },
     "plugins": [
         "babel",
         "react",
         "import"
-    ]
+    ],
+    "rules": {
+        "no-debugger": process.env.NODE_ENV === 'production' ? 2 : 0,
+        'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
+    }
 }

@@ -68,10 +68,10 @@ module.exports = {
         //     loaders: ['style-loader', 'css-loader', 'sass-loader', 'less-loader']
         // }),
 
-        // new webpack.ProvidePlugin({
-        //     moment: 'moment',
-        //     R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
-        // }),
+        new webpack.ProvidePlugin({
+            moment: 'moment',
+            R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
+        }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             title: 'react-boilerplate',
