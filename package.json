@@ -4,7 +4,9 @@
   "description": " react project",
   "main": "src/index.js",
   "sideEffects": [
-    "*.css", "*.scss", "*.sass"
+    "*.css",
+    "*.scss",
+    "*.sass"
   ],
   "scripts": {
     "dll": "webpack -p --env.production --config webpack/webpack.dll.conf.js --progress",
@@ -20,13 +22,18 @@
   "author": "seven",
   "license": "MIT",
   "dependencies": {
-    "@types/ramda": "^0.26.15",
+    "@material-ui/core": "^4.2.0",
     "axios": "^0.19.0",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
+    "connected-react-router": "^6.5.2",
     "history": "^4.7.2",
     "ramda": "^0.26.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -38,10 +45,15 @@
     "@babel/preset-typescript": "^7.3.3",
     "@babel/runtime": "^7.4.5",
     "@fortawesome/fontawesome-free": "^5.9.0",
+    "@types/classnames": "^2.2.9",
+    "@types/history": "^4.7.2",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
+    "@types/ramda": "^0.26.16",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
+    "@types/react-redux": "^7.1.1",
+    "@types/react-router": "^5.0.3",
     "@types/webpack-env": "^1.13.9",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "autoprefixer": "^9.5.1",
