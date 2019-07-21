@@ -12,7 +12,7 @@ const render = (Component: React.FC) => {
             <Component />
         </Provider>
         ,
-        document.getElementById('root'));
+        document.getElementById('root'))
 }
 
 render(App)
