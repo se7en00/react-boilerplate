@@ -44,7 +44,7 @@ const sassLoader = {
     loader: require.resolve('sass-loader'),
     options: {
         sourceMap: shouldUseSourceMap,
-        data: `@import "${paths.appScss}/common.scss";`
+        data: `@import "src/scss/common.scss";`
     }
 };
 

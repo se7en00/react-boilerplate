@@ -9,8 +9,9 @@
     "*.sass"
   ],
   "scripts": {
-    "dll": "webpack -p --env.production --config webpack/webpack.dll.conf.js --progress",
     "analyz": "yarn build --report",
+    "check": "tsc -w",
+    "dll": "webpack -p --env.production --config webpack/webpack.dll.conf.js --progress",
     "build": "node scripts/build.js",
     "build:debug": "node %NODE_DEBUG_OPTION% scripts/build.js",
     "start:debug": "node %NODE_DEBUG_OPTION% scripts/start.js",

@@ -1,9 +1,10 @@
 {
     "presets": [
-        ["@babel/env",{ "modules": false }],
+        ["@babel/env", { "modules": false }],
+        "@babel/preset-typescript",
         "@babel/react"
     ],
-    "env": {
+        "env": {
         "development": {
             "plugins": [
                 "@babel/plugin-transform-runtime",
@@ -21,3 +22,22 @@
         }
     }
 }
+
+// const preset = [
+//     ["@babel/env", { "modules": false }],
+//     "@babel/preset-typescript",
+//     "@babel/react"
+// ]
+
+// const plugins = [
+//     "@babel/plugin-transform-runtime",
+//     "@babel/plugin-proposal-class-properties",
+//     "@babel/plugin-proposal-optional-chaining",
+//     process.env["ENV"] === "development" &&  "react-hot-loader/babel"
+// ].filter(Boolean)
+
+
+// module.exports = {
+//     preset,
+//     plugins
+// }
