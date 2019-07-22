@@ -34,7 +34,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: entry(paths),
     output: output(paths),
-    resolve: resolve(paths, {SCSS_PATH: paths.appScss}),
+    resolve: resolve(paths, {'@': paths.appSrc}),
     module: {
         strictExportPresence: true,
         rules: [
