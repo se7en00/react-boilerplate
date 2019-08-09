@@ -5,6 +5,7 @@ import { History } from 'history'
 import { LayoutState, layoutReducer } from './layout'
 
 export interface IRootState {
+    router: RouterState,
     layout: LayoutState
 }
 
@@ -16,6 +17,6 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 
 export const createRootReducer = (history: History) =>
     combineReducers({
-        layout: layoutReducer
-        // router: connectRouter(history)
+        layout: layoutReducer,
+        router: connectRouter(history)
     })

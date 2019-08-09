@@ -10,6 +10,7 @@
                 "@babel/plugin-transform-runtime",
                 "@babel/plugin-proposal-class-properties",
                 "@babel/plugin-proposal-optional-chaining",
+                "@babel/plugin-syntax-dynamic-import",
                 "react-hot-loader/babel"
             ]
         },
@@ -17,7 +18,8 @@
             "plugins": [
                 "@babel/plugin-transform-runtime",
                 "@babel/plugin-proposal-class-properties",
-                "@babel/plugin-proposal-optional-chaining"
+                "@babel/plugin-proposal-optional-chaining",
+                "@babel/plugin-syntax-dynamic-import"
             ]
         }
     }

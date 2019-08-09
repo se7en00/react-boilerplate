@@ -43,7 +43,7 @@ module.exports = {
     devtool: 'source-map',
     entry: entry(paths),
     output: output(paths),
-    resolve: resolve(paths, {SCSS_PATH: paths.appScss}),
+    resolve: resolve(paths, {'@': paths.appSrc}),
     module: {
         //makes missing exports an error instead of warning
         strictExportPresence: true,
