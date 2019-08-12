@@ -4,23 +4,24 @@ const MISSING_ERROR = 'Error was swallowed during propagation.'
 
 // These props will be subtracted from base component props
 interface InjectedProps {
-    onReset: () => void
+    onReset?: () => void
 }
 
-export const withErrorHandler = <BaseProps extends InjectedProps>(
-    _BaseComponent: React.ComponentType<BaseProps>
+const withErrorHandler = <P extends InjectedProps>(
+    _BaseComponent: React.ComponentType<P>
 ) => {
     // fix for TypeScript issues: https://github.com/piotrwitek/react-redux-typescript-guide/issues/111
     const BaseComponent = _BaseComponent as React.ComponentType<InjectedProps>
 
-    type HocProps = Omit<BaseProps, 'onReset'> & {
+    type HocProps = Omit<P, keyof InjectedProps> & {
         // here you can extend hoc with new props
     }
+
     type HocState = {
         readonly error: Error | null | undefined
     }
 
-    return class Hoc extends React.Component<HocProps, HocState> {
+    return class HOC extends React.Component<HocProps, HocState> {
         // Enhance component name for debugging and React-Dev-Tools
         static displayName = `withErrorHandler(${BaseComponent.name})`
         // reference to original wrapped component
@@ -30,10 +31,10 @@ export const withErrorHandler = <BaseProps extends InjectedProps>(
             error: undefined,
         }
 
-        static getDerivedStateFromError(error: Error) {
-            // 更新 state 使下一次渲染能够显示降级后的 UI
-            // return { hasError: true }
-          }
+        // static getDerivedStateFromError(error: Error) {
+        //     // 更新 state 使下一次渲染能够显示降级后的 UI
+        //     // return { hasError: true }
+        //   }
 
         componentDidCatch(error: Error | null, info: object) {
             this.setState({ error: error || new Error(MISSING_ERROR) })
@@ -63,5 +64,8 @@ export const withErrorHandler = <BaseProps extends InjectedProps>(
 
             return children
         }
-    }
+    } 
 }
+
+
+export default withErrorHandler

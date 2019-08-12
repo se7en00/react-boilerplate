@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,  //support Decorators
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
