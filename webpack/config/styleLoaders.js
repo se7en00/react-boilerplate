@@ -84,7 +84,7 @@ const postCssLoader = () => {
 
 const getStyleLoaders = () => {
     const loaders = (isModule = false) => [
-        isProduction ? styleLoader :
+        !isProduction ? styleLoader :
         {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -93,7 +93,7 @@ const getStyleLoaders = () => {
         },
         cssLoader(isModule),
         postCssLoader(),
-        resolveUrlLoader,
+        // resolveUrlLoader,
         sassLoader
     ]
     const styleRule = {
