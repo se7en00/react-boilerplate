@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const {
@@ -42,7 +43,7 @@ module.exports = {
     devtool: 'source-map',
     entry: entry(paths),
     output: output(paths),
-    resolve: resolve(paths, {SCSS_PATH: paths.appScss}),
+    resolve: resolve(paths, {'@': paths.appSrc}),
     module: {
         //makes missing exports an error instead of warning
         strictExportPresence: true,
@@ -58,16 +59,18 @@ module.exports = {
                     babelLoader(paths),
                     ...getStyleLoaders(),
                     imagesUrlLoader(),
-                    ...fontsLoader(),
+                    fontsLoader(),
                     noMatchLoader()
                 ]
             }
         ]
     },
     plugins: [
+        process.env.BUNDLE_ANALYZERREPORT_REREPORT === 'true' && new BundleAnalyzerPlugin(),
+       
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
-            title: 'aland',
+            title: 'react-boilerplate',
             inject: true,
             showErrors: true,
             template: paths.appHtml,
@@ -95,10 +98,9 @@ module.exports = {
         // Otherwise React will be compiled in the very slow development mode.
         new webpack.DefinePlugin(env.stringified),
 
-        // new webpack.ProvidePlugin({
-        //     moment: 'moment',
-        //     R: 'ramda'
-        // }),
+        new webpack.ProvidePlugin({
+            R: 'ramda'
+        }),
 
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -149,7 +151,7 @@ module.exports = {
         new webpack.optimize.RuntimeChunkPlugin({
             name: 'manifest'
         })
-    ],
+    ].filter(Boolean),
     node: {
         constants: false
     }

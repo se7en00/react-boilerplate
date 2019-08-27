@@ -1,9 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './scss/global.scss'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import { Provider } from 'react-redux'
+import App from './containers/App'
+import configureStore, {history} from '@/store/configureStore'
+import 'scss/global.scss'
 
+const store = configureStore()
+const render = (Component: React.FC) => {
+    ReactDOM.render(
+        <Provider store={store}>
+            <ConnectedRouter  history={history}>
+                <Component />
+            </ConnectedRouter>
 
+        </Provider>
+        ,
+        document.getElementById('root'))
+}
 
-ReactDOM.render(<App />, document.getElementById('root'))
+render(App)
 

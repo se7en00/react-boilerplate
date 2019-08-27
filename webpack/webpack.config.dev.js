@@ -34,13 +34,13 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: entry(paths),
     output: output(paths),
-    resolve: resolve(paths, {SCSS_PATH: paths.appScss}),
+    resolve: resolve(paths, {'@': paths.appSrc}),
     module: {
         strictExportPresence: true,
         rules: [
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
-            eslintRules(paths),
+            // eslintRules(paths),
             {
                 // "oneOf" will traverse all following loaders until one will
                 // match the requirements. When no loader matches it will fall
@@ -68,10 +68,10 @@ module.exports = {
         //     loaders: ['style-loader', 'css-loader', 'sass-loader', 'less-loader']
         // }),
 
-        // new webpack.ProvidePlugin({
-        //     moment: 'moment',
-        //     R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
-        // }),
+        new webpack.ProvidePlugin({
+            moment: 'moment',
+            R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
+        }),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             title: 'react-boilerplate',
