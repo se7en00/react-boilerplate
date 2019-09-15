@@ -2,10 +2,10 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import withErrorHandler from '@/components/withErrorHandler'
-import{requiresUser} from '@/components/test2'
+import { requiresUser } from '@/components/test2'
 import { connect } from 'react-redux'
 import { IRootState } from '@/store'
-import { toggleSideBar } from '@/store/layout'
+import { usersActions } from '@/store/user'
 
 export interface ILoginProps extends Partial<RouteComponentProps> {
     test?: string
@@ -18,15 +18,21 @@ const mapStateToProps = (state: IRootState) => {
 }
 
 const dispatchProps = {
-    toggleSideBar
-  }
+    getUsers: usersActions.getUsers,
+}
+
+type IDispatchProps = typeof dispatchProps
 
 // @withErrorHandler
-@requiresUser
-class Login extends React.Component<ILoginProps> {
+@connect(mapStateToProps, dispatchProps)
+class Login extends React.Component<ILoginProps & IDispatchProps> {
 
     private goLogin = () => {
         alert("开始登录")
+    }
+
+    componentDidMount() {
+        this.props.getUsers()
     }
 
     render() {
