@@ -1,47 +1,54 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
-// import { composeWithDevTools } from 'redux-devtools-extension'
-import { routerMiddleware,RouterState } from 'connected-react-router'
+import { routerMiddleware, RouterState } from 'connected-react-router'
+import { RootAction, RootState, Utils } from 'store-types'
 //middleware
 // import loadingMiddleware from './middleware/loadingMiddleware'
-import {createBrowserHistory} from 'history'
+import { createBrowserHistory } from 'history'
+
+import utils from '@/utils'
 import rootReducer from './root-reducer'
-
-import { LayoutState } from './layout'
-import { usersReducer, IUserState} from './user'
 import rootEpic from './root-epic'
-
-export interface IRootState {
-    router: RouterState,
-    layout: LayoutState,
-    user: IUserState
-}
 
 //browser history
 export const history = createBrowserHistory()
 
 export const epicMiddleware = createEpicMiddleware<
-  Types.RootAction,
-  Types.RootAction,
-  Types.RootState
-//   Services
+    RootAction,
+    RootAction,
+    RootState,
+    Utils
 >({
-//   dependencies: services,
+    dependencies: utils,
 })
 
-const middleware = [
+const middlewares = [
     epicMiddleware,
     routerMiddleware(history),
     // process.env.NODE_ENV !== 'production' && (createLogger())
 ].filter(Boolean)
 
-const finalCreateStore = compose(
-    applyMiddleware(...middleware)
-)(createStore)
+const composeEnhancers = (process.env.NODE_ENV === 'development' &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose
 
+const enhancer = composeEnhancers(applyMiddleware(...middlewares))
+
+// const finalCreateStore = compose(
+//     applyMiddleware(...middleware)
+// )(createStore)
+
+// rehydrate state on app start
+const initialState = {};
+
+// create store
+const store = createStore(rootReducer(history), initialState, enhancer)
 
 epicMiddleware.run(rootEpic)
 
-export default function configureStore(initialState?:IRootState) {
-    return finalCreateStore(rootReducer(history), initialState)
-}
+export default store
+
+// export default function configureStore(initialState = {}) {
+//     return finalCreateStore(rootReducer(history), initialState)
+// }

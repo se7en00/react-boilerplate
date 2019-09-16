@@ -6,7 +6,7 @@ import App from './containers/App'
 import configureStore, { history } from '@/store'
 import 'scss/global.scss'
 
-const store = configureStore()
+const store = configureStore
 const render = (Component: React.FC) => {
     ReactDOM.render(
         <Provider store={store}>

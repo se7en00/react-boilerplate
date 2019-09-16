@@ -6,11 +6,13 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "allowJs": true, // include js files
+    "checkJs": false, // typecheck js files
     "skipLibCheck": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true,  // enable to do "import React ..." instead of "import * as React ..."
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,  //support Decorators
+    "emitDecoratorMetadata": true, // include only if using decorators
+    "experimentalDecorators": true, // include only if using decorators
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
