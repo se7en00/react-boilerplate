@@ -1,8 +1,8 @@
 
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import withErrorHandler from '@/components/withErrorHandler'
-import { requiresUser } from '@/components/test2'
+// import withErrorHandler from '@/components/withErrorHandler'
+// import { requiresUser } from '@/components/test2'
 import { connect } from 'react-redux'
 import { RootState } from 'store-types'
 import { usersActions } from '@/store/user'
@@ -24,6 +24,7 @@ const dispatchProps = {
 type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps
 
 // @withErrorHandler
+
 @connect(mapStateToProps, dispatchProps)
 class Login extends React.Component<ILoginProps & Props> {
 
