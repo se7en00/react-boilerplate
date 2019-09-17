@@ -1,15 +1,11 @@
 
 import * as React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 // import withErrorHandler from '@/components/withErrorHandler'
 // import { requiresUser } from '@/components/test2'
 import { connect } from 'react-redux'
-import { RootState } from 'store-types'
+import { RootState } from 'typesafe-actions'
 import { usersActions } from '@/store/user'
-
-export interface ILoginProps extends Partial<RouteComponentProps> {
-    test?: string
-}
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -21,12 +17,14 @@ const dispatchProps = {
     getUsers: usersActions.getUsers,
 }
 
-type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps
-
+type unionTypes = Partial<RouteComponentProps> & ReturnType<typeof mapStateToProps> & typeof dispatchProps
+interface IProps extends unionTypes {
+    test?: string
+}
 // @withErrorHandler
-
+// @withRouter
 @connect(mapStateToProps, dispatchProps)
-class Login extends React.Component<ILoginProps & Props> {
+class Login extends React.Component<IProps> {
 
     private goLogin = () => {
         alert("开始登录")
@@ -51,7 +49,5 @@ class Login extends React.Component<ILoginProps & Props> {
         </div>;
     }
 }
-
-
 
 export default Login

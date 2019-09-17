@@ -1,22 +1,39 @@
 import { combineReducers } from 'redux'
 import { ActionType, createReducer } from 'typesafe-actions'
-import * as users from './actions'
-import { E_USER_ACTION_TYPES, IUserState } from './types'
+import { IUser } from './user-types'
+import * as userActions from './actions'
 
-export type IUesrActions = ActionType<typeof users>
+export type UserState = Readonly<{
+    userList: IUser[]
+}>
 
-const initialState: IUserState = {
+const initialState: UserState = {
     userList: []
 }
 
 /**
  * get users
  */
-const getUsers = createReducer(initialState.userList).handleAction(
-    E_USER_ACTION_TYPES.GET_USERS,
-    (state, action) => action.payload
-)
+const getUsersReducer = createReducer(initialState.userList)
+    .handleAction(userActions.getUsers, (state, action) => {
+        console.log(3333)
+        return [...state]
+    })
 
 export default combineReducers({
-    getUsers
+    getUsersReducer
 })
+
+// export type userActions = ActionType<typeof userActions>;
+
+// export default combineReducers<UserState, userActions>({
+//     userList: (state = initialState.userList, action) => {
+//         switch (action.type) {
+//           case E_USER_ACTION_TYPES.GET_USERS:
+//             return [...state];
+    
+//           default:
+//             return state;
+//         }
+//       }
+// })

@@ -1,7 +1,6 @@
-export enum E_USER_ACTION_TYPES {
-    GET_USERS = '@@user/GET_USERS'
-}
+const prefix = '@@user'
 
-export interface IUserState {
-    readonly userList: []
-}
+export default ({
+    GET_USERS: `${prefix}/GET_USERS`,
+    GET_USERS_BY_ID: `${prefix}/GET_USER_BY_ID`
+} as const)

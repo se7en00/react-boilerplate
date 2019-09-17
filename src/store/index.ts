@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import { routerMiddleware, RouterState } from 'connected-react-router'
-import { RootAction, RootState, Utils } from 'store-types'
+import { RootAction, RootState, Utils } from 'typesafe-actions'
 //middleware
 // import loadingMiddleware from './middleware/loadingMiddleware'
 import { createBrowserHistory } from 'history'
