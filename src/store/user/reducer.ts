@@ -4,24 +4,34 @@ import { IUser } from './user-types'
 import * as userActions from './actions'
 
 export type UserState = Readonly<{
-    userList: IUser[]
+    userList: IUser[],
+    user: IUser | null
 }>
 
 const initialState: UserState = {
-    userList: []
+    userList: [],
+    user: null
 }
 
 /**
  * get users
  */
-const getUsersReducer = createReducer(initialState.userList)
+const userList = createReducer(initialState.userList)
     .handleAction(userActions.getUsers, (state, action) => {
         console.log(3333)
         return [...state]
     })
 
+const user = createReducer(initialState.user)
+    .handleAction(userActions.getUserById, (state, action) => {
+        console.log(33334)
+        return state
+    })
+
+
 export default combineReducers({
-    getUsersReducer
+    userList,
+    user
 })
 
 // export type userActions = ActionType<typeof userActions>;
@@ -31,7 +41,7 @@ export default combineReducers({
 //         switch (action.type) {
 //           case E_USER_ACTION_TYPES.GET_USERS:
 //             return [...state];
-    
+
 //           default:
 //             return state;
 //         }
