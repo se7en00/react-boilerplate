@@ -1,0 +1,53 @@
+.scroll {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    @include e(list) {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #f5ad7c;
+        overflow-y: auto;
+        padding: 0;
+
+        &:-webkit-scrollbar {
+            display: none;
+        }
+
+        li {
+          padding : 10px 5px;
+          line-height: 1.5;
+          &:nth-child(odd) {
+            background : #ffe8d8;
+          }
+          &:nth-child(even) {
+            background : #f5ad7c;
+          }
+        }
+
+        @include m(isEnd) {
+            height: calc(100% - 36px);
+        }
+    }
+
+    @include e(loading) {
+        position: absolute;
+        width:100px;
+        height:100px;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%)
+    }
+
+
+    @include e(noMoreInfo) {
+        text-align: center;
+        padding: 10px;
+        line-height: 16px;
+        background-color: #fff;
+        position: fixed;
+        bottom: 0;
+        width: 100%
+    }
+}
