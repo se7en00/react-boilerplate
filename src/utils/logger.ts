@@ -1,2 +1,2 @@
-// tslint:disable-next-line:no-console
-export default { log: console.log };
+/* eslint-disable-next-line */
+export default { log: console.log }

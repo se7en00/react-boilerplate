@@ -1,7 +1,7 @@
-import logger from './logger'
+import logger from "./logger"
 
 const utils = {
-    logger,
+    logger
 }
 
 export default utils

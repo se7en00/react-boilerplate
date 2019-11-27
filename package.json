@@ -16,9 +16,7 @@
     "build:debug": "node %NODE_DEBUG_OPTION% scripts/build.js",
     "start:debug": "node %NODE_DEBUG_OPTION% scripts/start.js",
     "start": "node scripts/start.js",
-    "lint": "eslint --cache --ignore-path .gitignore --ext .jsx,.js --format=node_modules/eslint-formatter-pretty .",
-    "lint:msg": "validate-commit-msg",
-    "lintfix": "eslint -c .eslintrc.json src --fix"
+    "lint": "eslint src --fix  --ext .js,.ts,.tsx"
   },
   "author": "seven",
   "license": "MIT",
@@ -67,7 +65,8 @@
     "@types/react-router": "^5.0.3",
     "@types/react-router-dom": "^4.3.4",
     "@types/webpack-env": "^1.13.9",
-    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
@@ -76,7 +75,8 @@
     "dotenv": "^8.0.0",
     "dotenv-expand": "^5.1.0",
     "escape-string-regexp": "^2.0.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-react-app": "^4.0.1",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-import-resolver-webpack": "^0.11.1",
@@ -85,6 +85,7 @@
     "eslint-plugin-flowtype": "^3.9.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.0.0",
     "eslint-plugin-react-hooks": "^1.6.0",
@@ -100,6 +101,7 @@
     "postcss": "^7.0.16",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "1.19.1",
     "react-dev-utils": "^9.0.1",
     "react-hot-loader": "^4.9.0",
     "resolve-url-loader": "^3.1.0",
@@ -114,5 +116,17 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run eslint",
+      "prettier .prettierrc.js --write",
+      "git add"
+    ]
   }
 }

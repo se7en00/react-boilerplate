@@ -1,19 +1,16 @@
-import * as React from 'react'
+import * as React from "react"
 
-const MISSING_ERROR = 'Error was swallowed during propagation.'
+const MISSING_ERROR = "Error was swallowed during propagation."
 
 // These props will be subtracted from base component props
-interface InjectedProps {
+interface IInjectedProps {
     onReset?: () => void
 }
-
-const withErrorHandler = <P extends InjectedProps>(
-    _BaseComponent: React.ComponentType<P>
-) => {
+const withErrorHandler = <P extends IInjectedProps>(_BaseComponent: React.ComponentType<P>) => {
     // fix for TypeScript issues: https://github.com/piotrwitek/react-redux-typescript-guide/issues/111
-    const BaseComponent = _BaseComponent as React.ComponentType<InjectedProps>
+    const BaseComponent = _BaseComponent as React.ComponentType<IInjectedProps>
 
-    type HocProps = Omit<P, keyof InjectedProps> & {
+    type HocProps = Omit<P, keyof IInjectedProps> & {
         // here you can extend hoc with new props
     }
 
@@ -28,7 +25,7 @@ const withErrorHandler = <P extends InjectedProps>(
         static readonly WrappedComponent = BaseComponent
 
         readonly state: HocState = {
-            error: undefined,
+            error: undefined
         }
 
         // static getDerivedStateFromError(error: Error) {
@@ -41,13 +38,13 @@ const withErrorHandler = <P extends InjectedProps>(
             this.logErrorToCloud(error, info)
         }
 
-        logErrorToCloud = (error: Error | null, info: object) => {
+        logErrorToCloud = (error: Error | null, info: object) => { /* eslint-disable-line */
             // TODO: send error report to service provider
-        };
+        }
 
         handleReset = () => {
             this.setState({ error: undefined })
-        };
+        }
 
         render() {
             const { children, ...restProps } = this.props
@@ -64,8 +61,7 @@ const withErrorHandler = <P extends InjectedProps>(
 
             return children
         }
-    } 
+    }
 }
-
 
 export default withErrorHandler

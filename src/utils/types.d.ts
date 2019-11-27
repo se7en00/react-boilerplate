@@ -1,6 +1,5 @@
-import {} from 'typesafe-actions';
+import {} from "typesafe-actions"
 
-declare module 'typesafe-actions' {
-  export type Utils = typeof import('./index').default
+declare module "typesafe-actions" {
+    export type Utils = typeof import("./index").default
 }
-

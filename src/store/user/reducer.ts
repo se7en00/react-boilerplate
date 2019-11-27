@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux'
-import { ActionType, createReducer } from 'typesafe-actions'
-import { IUser } from './user-types'
-import * as userActions from './actions'
+import { combineReducers } from "redux"
+import { createReducer } from "typesafe-actions"
+import { IUser } from "./user-types"
+import * as userActions from "./actions"
 
 export type UserState = Readonly<{
     userList: IUser[]
@@ -14,11 +14,10 @@ const initialState: UserState = {
 /**
  * get users
  */
-const getUsersReducer = createReducer(initialState.userList)
-    .handleAction(userActions.getUsers, (state, action) => {
-        console.log(3333)
-        return [...state]
-    })
+/* eslint-disable-next-line */
+const getUsersReducer = createReducer(initialState.userList).handleAction(userActions.getUsers, (state, action) => {
+    return [...state]
+})
 
 export default combineReducers({
     getUsersReducer
@@ -31,7 +30,7 @@ export default combineReducers({
 //         switch (action.type) {
 //           case E_USER_ACTION_TYPES.GET_USERS:
 //             return [...state];
-    
+
 //           default:
 //             return state;
 //         }

@@ -1,37 +1,30 @@
-import { createStore, compose, applyMiddleware } from 'redux'
-import { createEpicMiddleware } from 'redux-observable'
-import { routerMiddleware, RouterState } from 'connected-react-router'
-import { RootAction, RootState, Utils } from 'typesafe-actions'
+import { createStore, compose, applyMiddleware } from "redux"
+import { createEpicMiddleware } from "redux-observable"
+import { routerMiddleware } from "connected-react-router"
+import { RootAction, RootState, Utils } from "typesafe-actions"
 //middleware
 // import loadingMiddleware from './middleware/loadingMiddleware'
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from "history"
 
-import utils from '@/utils'
-import rootReducer from './root-reducer'
-import rootEpic from './root-epic'
+import utils from "@/utils"
+import rootReducer from "./root-reducer"
+import rootEpic from "./root-epic"
 
 //browser history
 export const history = createBrowserHistory()
 
-export const epicMiddleware = createEpicMiddleware<
-    RootAction,
-    RootAction,
-    RootState,
-    Utils
->({
-    dependencies: utils,
+export const epicMiddleware = createEpicMiddleware<RootAction, RootAction, RootState, Utils>({
+    dependencies: utils
 })
 
 const middlewares = [
     epicMiddleware,
-    routerMiddleware(history),
+    routerMiddleware(history)
     // process.env.NODE_ENV !== 'production' && (createLogger())
 ].filter(Boolean)
 
-const composeEnhancers = (process.env.NODE_ENV === 'development' &&
-    window &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-    compose
+const composeEnhancers =
+    (process.env.NODE_ENV === "development" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares))
 
@@ -40,7 +33,7 @@ const enhancer = composeEnhancers(applyMiddleware(...middlewares))
 // )(createStore)
 
 // rehydrate state on app start
-const initialState = {};
+const initialState = {}
 
 // create store
 const store = createStore(rootReducer(history), initialState, enhancer)

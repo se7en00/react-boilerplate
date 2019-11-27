@@ -1,5 +1,4 @@
-import { LayoutActionTypes } from './types'
-
+import { LayoutActionTypes } from "./types"
 
 export const toggleSideBar = () => {
     return {

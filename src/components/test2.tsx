@@ -1,21 +1,16 @@
-import * as React from 'react'
+import * as React from "react"
 
-
-export const requiresUser = <
-  P,
-  T extends { new (props: any): React.Component<P> }
->(
-  _component: T
-): T => {
+/* eslint-disable-next-line */
+export const requiresUser = <P, T extends { new (props: any): React.Component<P> }>(_component: T): T => {
     const Component = _component as React.ComponentType<P>
-  class RequiresUser extends React.Component<P> {
-    componentDidMount() {
-      console.log("requires user");
-    }
+    class RequiresUser extends React.Component<P> {
+        componentDidMount() {
+            // console.log("requires user")
+        }
 
-    render() {
-      return <Component {...this.props} />;
+        render() {
+            return <Component {...this.props} />
+        }
     }
-  }
-  return RequiresUser as T;
-};
+    return RequiresUser as T
+}
