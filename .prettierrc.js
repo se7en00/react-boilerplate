@@ -30,5 +30,20 @@ module.exports = {
     // avoid 能省略括号的时候就省略 例如x => x
     // always 总是有括号
     arrowParens: "avoid",
-    parser: "typescript"
+    // parser: "typescript", // SyntaxError when format json file: https://github.com/azz/pretty-quick/issues/23
+    overrides: [
+        {
+            files: "*.md",
+            options: {
+              "tabWidth": 4
+            }
+        },
+
+        {
+          files: "*.json",
+          options: {
+            tabWidth: 6
+          }
+        }
+      ]
 }

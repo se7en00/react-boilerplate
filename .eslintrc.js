@@ -42,6 +42,7 @@ module.exports = {
         moment: false
     },
     rules: {
+        "no-var": "error",
         "prettier/prettier": "error",
         'arrow-parens': 0,
         //函数的箭头之前或之后有空格

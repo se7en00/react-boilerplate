@@ -5,7 +5,7 @@ const presets = [
 ]
 
 const plugins = [
-    "@babel/plugin-transform-runtime",
+    ["@babel/plugin-transform-runtime", { allowNamespaces: true }]
     ["@babel/plugin-proposal-decorators",{"legacy": true}],
     ["@babel/plugin-proposal-class-properties",{"loose": true}],
     "@babel/plugin-proposal-optional-chaining",

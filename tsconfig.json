@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
     "allowJs": true, // include js files
     "checkJs": false, // typecheck js files
     "skipLibCheck": true,
@@ -19,6 +22,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    //可选参数会被自动地加上 | undefined
+    "strictNullChecks": true,
     // "noUnusedLocals": true,
     "noEmit": true,
     "jsx": "preserve",
