@@ -35,15 +35,15 @@ module.exports = {
         {
             files: "*.md",
             options: {
-              "tabWidth": 4
+                tabWidth: 4
             }
         },
 
         {
-          files: "*.json",
-          options: {
-            tabWidth: 6
-          }
+            files: "*.json",
+            options: {
+                tabWidth: 6
+            }
         }
-      ]
+    ]
 }
