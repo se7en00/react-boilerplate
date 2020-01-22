@@ -1,5 +1,7 @@
-import { createStore, compose, applyMiddleware } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { createEpicMiddleware } from "redux-observable"
+import { composeWithDevTools } from "redux-devtools-extension"
+import { composeWithDevTools as devToolsEnhancer } from "redux-devtools-extension/logOnlyInProduction"
 import { routerMiddleware } from "connected-react-router"
 import { RootAction, RootState, IServices } from "typesafe-actions"
 //middleware
@@ -23,14 +25,9 @@ const middlewares = [
     // process.env.NODE_ENV !== 'production' && (createLogger())
 ].filter(Boolean)
 
-const composeEnhancers =
-    (process.env.NODE_ENV === "development" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
+const composeEnhancers = process.env.NODE_ENV === "development" ? composeWithDevTools : devToolsEnhancer
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares))
-
-// const finalCreateStore = compose(
-//     applyMiddleware(...middleware)
-// )(createStore)
 
 // rehydrate state on app start
 const initialState = {}

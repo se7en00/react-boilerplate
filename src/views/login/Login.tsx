@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router-dom"
 import { connect } from "react-redux"
 import { RootState } from "typesafe-actions"
 import { usersActions } from "@/store/user"
+import style from "./Login.module.scss"
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -39,6 +40,7 @@ class Login extends React.Component<IProps> {
     }
 
     render() {
+        const { userList } = this.props
         return (
             <div>
                 <h3>登录页面</h3>
@@ -51,7 +53,9 @@ class Login extends React.Component<IProps> {
                     <input type="text" />
                 </div>
                 <div>
-                    <button onClick={this.goLogin}>登录</button>
+                    <button className={style.btn} onClick={this.goLogin}>
+                        登录
+                    </button>
                 </div>
             </div>
         )
