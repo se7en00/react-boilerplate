@@ -8,12 +8,14 @@ import { usersActions } from "@/store/user"
 
 const mapStateToProps = (state: RootState) => {
     return {
-        router: state.router
+        router: state.router,
+        userList: state.user.userList
     }
 }
 
 const dispatchProps = {
-    getUsers: usersActions.getUsers
+    loadUsersAsync: usersActions.loadUsersAsync.request,
+    searchByUserName: usersActions.searchUserByName
 }
 
 type unionTypes = Partial<RouteComponentProps> & ReturnType<typeof mapStateToProps> & typeof dispatchProps
@@ -29,7 +31,11 @@ class Login extends React.Component<IProps> {
     }
 
     componentDidMount() {
-        this.props.getUsers()
+        this.props.loadUsersAsync()
+    }
+
+    search = (name: string) => {
+        this.props.searchByUserName({ name })
     }
 
     render() {

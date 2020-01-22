@@ -39,7 +39,8 @@ module.exports = {
         console: false,
         module: false,
         R: false,
-        moment: false
+        dayjs: false,
+        _: false
     },
     rules: {
         "no-var": "error",
@@ -94,11 +95,7 @@ module.exports = {
         //typescript
         //接口必须带前缀I
         "@typescript-eslint/interface-name-prefix": [1,{"prefixWithI": "always"}],
-        //
-        "@typescript-eslint/explicit-function-return-type":[0, {
-            "allowHigherOrderFunctions": true,
-            "allowExpressions": true,
-            "allowHigherOrderFunctions":true
-        }],
+        //关闭方法必须要返回类型
+        "@typescript-eslint/explicit-function-return-type": 0,
     }
 }

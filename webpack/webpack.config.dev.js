@@ -69,7 +69,8 @@ module.exports = {
         // }),
 
         new webpack.ProvidePlugin({
-            moment: 'moment',
+            dayjs: 'dayjs',
+            _: 'lodash',
             R: 'ramda' //所有页面都会引入 _ 这个变量，不用再import引入
         }),
         // Generates an `index.html` file with the <script> injected.

@@ -1,20 +1,20 @@
 import { createStore, compose, applyMiddleware } from "redux"
 import { createEpicMiddleware } from "redux-observable"
 import { routerMiddleware } from "connected-react-router"
-import { RootAction, RootState, Utils } from "typesafe-actions"
+import { RootAction, RootState, IServices } from "typesafe-actions"
 //middleware
 // import loadingMiddleware from './middleware/loadingMiddleware'
 import { createBrowserHistory } from "history"
 
-import utils from "@/utils"
+import services from "@/services"
 import rootReducer from "./root-reducer"
 import rootEpic from "./root-epic"
 
 //browser history
 export const history = createBrowserHistory()
 
-export const epicMiddleware = createEpicMiddleware<RootAction, RootAction, RootState, Utils>({
-    dependencies: utils
+export const epicMiddleware = createEpicMiddleware<RootAction, RootAction, RootState, IServices>({
+    dependencies: services
 })
 
 const middlewares = [

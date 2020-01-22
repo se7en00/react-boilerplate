@@ -1,5 +1,5 @@
 // import { createSelector } from 'reselect';
 
-import { UserState } from "./reducer"
+import { IUserState } from "./reducer"
 
-export const getUsers = (state: UserState) => state.userList
+export const getUsers = (state: IUserState) => state.userList
