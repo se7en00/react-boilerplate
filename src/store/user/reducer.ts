@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
-import { createReducer } from "typesafe-actions"
+import { createReducer, ActionType } from "typesafe-actions"
+import produce, { Draft } from "immer"
 import { IUser } from "./userModel"
 import { loadUsersAsync, searchUserByName } from "./actions"
 
@@ -8,19 +9,28 @@ import { loadUsersAsync, searchUserByName } from "./actions"
  * @param {IUser[]} 成功加载用户列表
  * @return: state
  */
-const userList = createReducer([] as IUser[]).handleAction(loadUsersAsync.success, (_, action) => {
-    return action.payload
-})
+// prettier-ignore
+const userList = createReducer([] as IUser[])
+    // 写法一
+    // .handleAction(loadUsersAsync.success, (state, action) => {
+    //     return produce(state, draft => {
+    //         return draft
+    //     })
+    // })
+    .handleAction(loadUsersAsync.success, produce((draft: Draft<IUser[]>, action: ActionType<typeof loadUsersAsync.success>) => action.payload))
 
 /**
  * @description: 搜索用户名
  * @param {string} searchName
  * @return: state
  */
-const searchName = createReducer("").handleAction(searchUserByName, (_, action) => {
-    const name = action.payload.name
-    return name
-})
+// prettier-ignore
+const searchName = createReducer("")
+    .handleAction(searchUserByName, produce((draft: Draft<string>, action: ActionType<typeof searchUserByName>) => {
+        draft = action.payload.name
+        return draft
+    })
+)
 
 const userReducer = combineReducers({
     userList,

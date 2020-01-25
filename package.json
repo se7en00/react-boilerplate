@@ -28,6 +28,7 @@
     "connected-react-router": "^6.5.2",
     "dayjs": "^1.8.14",
     "history": "^4.7.2",
+    "immer": "^5.3.2",
     "lodash": "^4.17.15",
     "ramda": "^0.26.1",
     "react": "16.11.0",
@@ -42,7 +43,7 @@
     "typesafe-actions": "^5.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
@@ -114,7 +115,7 @@
     "sass-resources-loader": "^2.0.1",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1",
+    "typescript": "3.7.5",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-api-mocker": "^1.4.3",
