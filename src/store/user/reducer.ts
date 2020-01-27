@@ -30,7 +30,7 @@ const searchName = createReducer("")
         draft = action.payload.name
         return draft
     })
-)
+    )
 
 const userReducer = combineReducers({
     userList,

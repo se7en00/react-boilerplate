@@ -1,15 +1,9 @@
-/*
- * @Date: 2019-12-22 11:06:58
- * @LastEditors  : seven
- * @LastEditTime : 2020-01-22 16:19:24
- */
 import { Epic } from "redux-observable"
 import { Observable, from } from "rxjs"
 import { filter, map, distinctUntilChanged, combineLatest, switchMap } from "rxjs/operators"
 import { RootAction, RootState, IServices, isActionOf } from "typesafe-actions"
 import { loadUsersAsync } from "./actions"
 import { ISearchParam } from "./userModel"
-/* eslint-disable-next-line */
 /**
  *
  * @description: 加载用户列表

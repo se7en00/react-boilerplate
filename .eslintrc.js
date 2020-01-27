@@ -71,11 +71,13 @@ module.exports = {
         "no-dupe-args": 2,
         // 必须使用 === 或 !==，禁止使用 == 或 !=，与 null 比较时除外
         'eqeqeq': [2, 'always', {null: 'ignore'}],
-        "space-before-function-paren": [2, {
-            "anonymous": "never",
-            "named": "never",
-            "asyncArrow": "always"
-        }],
+        //跟prettier冲突
+        // "space-before-function-paren": [2, {
+        //     "anonymous": "never",
+        //     "named": "never",
+        //     "asyncArrow": "always"
+        // }],
+        "space-before-function-paren": [0, "always"],
         //代码末尾不需要分号
         "semi": [2, "never"],
         "space-before-blocks": [1, "always"],
