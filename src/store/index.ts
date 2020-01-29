@@ -5,7 +5,7 @@ import { composeWithDevTools as devToolsEnhancer } from "redux-devtools-extensio
 import { routerMiddleware } from "connected-react-router"
 import { RootAction, RootState, IServices } from "typesafe-actions"
 //middleware
-// import loadingMiddleware from './middleware/loadingMiddleware'
+import loadingMiddleware from "./middleware/loading/loadingMiddleware"
 import { createBrowserHistory } from "history"
 
 import services from "@/services"
@@ -20,6 +20,7 @@ export const epicMiddleware = createEpicMiddleware<RootAction, RootAction, RootS
 })
 
 const middlewares = [
+    loadingMiddleware,
     epicMiddleware,
     routerMiddleware(history)
     // process.env.NODE_ENV !== 'production' && (createLogger())

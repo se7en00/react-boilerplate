@@ -1,5 +1,5 @@
 import { createAsyncAction, createAction } from "typesafe-actions"
-import TYPES, { asyncTypes } from "./types"
+import TYPES, { getAsyncActionConstants } from "./types"
 import { ISearchParam } from "./userModel"
 import { IUser } from "./userModel"
 
@@ -8,7 +8,7 @@ import { IUser } from "./userModel"
  * @param {undefined}
  * @return: EmptyAC<string>
  */
-export const loadUsersAsync = createAsyncAction(...asyncTypes("user"))<undefined, IUser[], Error>()
+export const loadUsersAsync = createAsyncAction(...getAsyncActionConstants("user"))<undefined, IUser[], Error>()
 
 /**
  * @description: 搜索用户

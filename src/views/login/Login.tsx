@@ -10,7 +10,8 @@ import style from "./Login.module.scss"
 const mapStateToProps = (state: RootState) => {
     return {
         router: state.router,
-        userList: state.user.userList
+        userList: state.user.userList,
+        loading: state.loading.isLoading
     }
 }
 
@@ -35,12 +36,12 @@ class Login extends React.Component<IProps> {
         this.props.loadUsersAsync()
     }
 
-    search = (name: string) => {
+    search = (name = "333") => {
         this.props.searchByUserName({ name })
     }
 
     render() {
-        const { userList } = this.props
+        const { userList, loading } = this.props
         return (
             <div>
                 <h3>登录页面</h3>
@@ -53,9 +54,10 @@ class Login extends React.Component<IProps> {
                     <input type="text" />
                 </div>
                 <div>
-                    <button className={style.btn} onClick={this.goLogin}>
+                    <button className={style.btn} onClick={() => this.search()}>
                         登录
                     </button>
+                    {loading && <div>加载中</div>}
                 </div>
             </div>
         )

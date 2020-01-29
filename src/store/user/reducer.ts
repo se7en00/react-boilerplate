@@ -29,12 +29,12 @@ const searchName = createReducer("")
     .handleAction(searchUserByName, produce((draft: Draft<string>, action: ActionType<typeof searchUserByName>) => {
         draft = action.payload.name
         return draft
-    })
-    )
+    }))
 
 const userReducer = combineReducers({
     userList,
-    searchName
+    searchName,
+    test
 })
 
 export default userReducer
