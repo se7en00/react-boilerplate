@@ -33,8 +33,7 @@ const searchName = createReducer("")
 
 const userReducer = combineReducers({
     userList,
-    searchName,
-    test
+    searchName
 })
 
 export default userReducer

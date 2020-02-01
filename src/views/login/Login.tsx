@@ -46,7 +46,7 @@ class Login extends React.Component<IProps> {
             <div>
                 <h3>登录页面</h3>
                 <div>
-                    用户名
+                    用户名 {navigator.language}
                     <input type="text" />
                 </div>
                 <div>

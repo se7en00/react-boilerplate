@@ -13,7 +13,7 @@ const babelLoader = (paths) => ({
         compact: process.env.NODE_ENV === 'production'
     },
     include: paths.appSrc, // Matches app's src directory
-    exclude: paths.appNodeModules || /node_modules/
+    exclude: /node_modules\/(?!react-intl|intl-messageformat|intl-messageformat-parser)/
 
 });
 module.exports = {

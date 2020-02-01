@@ -67,7 +67,7 @@ module.exports = {
     },
     plugins: [
         process.env.BUNDLE_ANALYZERREPORT_REREPORT === 'true' && new BundleAnalyzerPlugin(),
-       
+
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             title: 'react-boilerplate',
@@ -99,6 +99,8 @@ module.exports = {
         new webpack.DefinePlugin(env.stringified),
 
         new webpack.ProvidePlugin({
+            dayjs: 'dayjs',
+            _: 'lodash',
             R: 'ramda'
         }),
 

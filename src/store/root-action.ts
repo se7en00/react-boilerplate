@@ -1,9 +1,11 @@
 import { routerActions } from "connected-react-router"
-import * as usersActions from "./user/actions"
-import * as loadingAction from "./middleware/loading/actions"
+import { usersActions } from "./user"
+import { loadingActions } from "./middleware/loading"
+import { localeActions } from "./locale"
 
 export default {
     router: routerActions,
     users: usersActions,
-    loading: loadingAction
+    loading: loadingActions,
+    locale: localeActions
 }

@@ -1,5 +1,5 @@
 import * as usersActions from "./actions"
-import usersReducer from "./reducer"
+import userReducer from "./reducer"
 export * from "./types"
 
-export { usersActions, usersReducer }
+export { usersActions, userReducer }

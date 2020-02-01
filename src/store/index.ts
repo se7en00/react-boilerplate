@@ -5,7 +5,7 @@ import { composeWithDevTools as devToolsEnhancer } from "redux-devtools-extensio
 import { routerMiddleware } from "connected-react-router"
 import { RootAction, RootState, IServices } from "typesafe-actions"
 //middleware
-import loadingMiddleware from "./middleware/loading/loadingMiddleware"
+import { loadingMiddleware } from "./middleware/loading"
 import { createBrowserHistory } from "history"
 
 import services from "@/services"

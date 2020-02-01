@@ -12,7 +12,7 @@ module.exports = {
         // Make sure this is always the last configuration in the extends array
         "plugin:prettier/recommended"
     ],
-    plugins: ["@typescript-eslint", "react", "prettier"],
+    plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
     env: {
         browser: true,
         node: true,
@@ -99,5 +99,8 @@ module.exports = {
         "@typescript-eslint/interface-name-prefix": [1,{"prefixWithI": "always"}],
         //关闭方法必须要返回类型
         "@typescript-eslint/explicit-function-return-type": 0,
+        "react/prop-types": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 }
