@@ -105,7 +105,7 @@
     "jest": "^24.8.0",
     "lint-staged": "^9.5.0",
     "mini-css-extract-plugin": "0.7.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^7.0.0",
     "open-browser-webpack-plugin": "^0.0.5",
     "postcss": "^7.0.16",
     "postcss-flexbugs-fixes": "^4.1.0",
